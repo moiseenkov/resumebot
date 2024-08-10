@@ -13,16 +13,6 @@ repos:
         - scripts/templates/license/LICENSE.txt
         - --fuzzy-match-generates-todo
     - id: insert-license
-      name: Add license for all md files
-      exclude: ^\.github/.*$|^.*/.*_vendor/
-      files: \.md$
-      args:
-        - --comment-style
-        - "||"
-        - --license-filepath
-        - scripts/templates/license/LICENSE.txt
-        - --fuzzy-match-generates-todo
-    - id: insert-license
       name: Add license for all Markdown files
       files: \.md$
       exclude: PROVIDER_CHANGES.*\.md$|^.*/.*_vendor/
@@ -43,3 +33,8 @@ repos:
         - --fuzzy-match-generates-todo
       files: >
         \.cfg$|\.conf$|\.ini$|\.ldif$|\.properties$|\.readthedocs$|\.service$|\.tf$|Dockerfile.*$
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: 'v1.11.1'
+  hooks:
+  - id: mypy
+    args: [--strict]
