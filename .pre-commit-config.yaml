@@ -1,0 +1,45 @@
+repos:
+- repo: https://github.com/Lucas-C/pre-commit-hooks
+  rev: v1.5.5
+  hooks:
+    - id: insert-license
+      name: Add license for all Python files
+      exclude: ^\.github/.*$|^.*/.*_vendor/
+      files: \.py$|\.pyi$
+      args:
+        - --comment-style
+        - "|#|"
+        - --license-filepath
+        - scripts/templates/license/LICENSE.txt
+        - --fuzzy-match-generates-todo
+    - id: insert-license
+      name: Add license for all md files
+      exclude: ^\.github/.*$|^.*/.*_vendor/
+      files: \.md$
+      args:
+        - --comment-style
+        - "||"
+        - --license-filepath
+        - scripts/templates/license/LICENSE.txt
+        - --fuzzy-match-generates-todo
+    - id: insert-license
+      name: Add license for all Markdown files
+      files: \.md$
+      exclude: PROVIDER_CHANGES.*\.md$|^.*/.*_vendor/
+      args:
+        - --comment-style
+        - "<!--|| -->"
+        - --license-filepath
+        - scripts/templates/license/LICENSE.txt
+        - --fuzzy-match-generates-todo
+    - id: insert-license
+      name: Add license for all other files
+      exclude: ^\.github/.*$|^.*/.*_vendor/
+      args:
+        - --comment-style
+        - "|#|"
+        - --license-filepath
+        - scripts/templates/license/LICENSE.txt
+        - --fuzzy-match-generates-todo
+      files: >
+        \.cfg$|\.conf$|\.ini$|\.ldif$|\.properties$|\.readthedocs$|\.service$|\.tf$|Dockerfile.*$
