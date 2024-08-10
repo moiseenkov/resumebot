@@ -13,14 +13,13 @@
  See the License for the specific language governing   permissions and
  limitations under the License.
 -->
-# Resumebot
+## Architecture
 
-Resumebot is a Telegram chatbot that provides interactive access to a resume.
-The intention of developing it is learning and trying some new technologies.
+![Architecture](/docs/images/architecture.png)
 
-## Table of contents
-- [Architecture](/docs/architecture.md)
-- [How to setup](#how-to-setup)
+The chatbot consists of three main components:
+1. ChatBot server for interaction with user.
+2. REST API for handling requests and providing the Chatbot with data.
+3. MongoDB M0 Cluster for storing and serving resume data.
 
-## How to setup
-TODO
+ChatBot and REST API are intended to be deployed in cloudRun instances under free tier so no expenditure is expected.
