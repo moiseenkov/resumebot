@@ -1,7 +1,18 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+#  Copyright (c) [2024] [Maksim Moiseenkov]
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
 
-name: Python application
+name: ci-dev
 
 on:
   pull_request_target:
@@ -20,29 +31,27 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 0  # Fetch all history for accurate diff
+        fetch-depth: 0
     
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
         python-version: "3.10"
-    
+
+    - name: Merge branch
+      run: |
+        git merge FETCH_HEAD
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pytest
         pip install -r requirements.txt
-    
-    - name: Get changed files
-      id: changed-files
-      run: |
-        git fetch origin dev
-        changed_files=$(git diff --name-only origin/dev...HEAD)
-        echo "changed_files=${changed_files}" >> $GITHUB_OUTPUT
-    
+
     - name: Lint with pre-commit
       run: |
-        pre-commit run --files ${{ steps.changed_files.outputs.changed_files }}
+        CHANGED_FILES=$(git diff --name-only origin/dev...HEAD)
+        pre-commit run --files $CHANGED_FILES
     
     - name: Test with pytest
       run: |
