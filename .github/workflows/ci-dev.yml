@@ -42,7 +42,7 @@ jobs:
     
     - name: Lint with pre-commit
       run: |
-        pre-commit --files ${{ steps.changed_files.outputs.changed_files }}
+        pre-commit run --files ${{ steps.changed_files.outputs.changed_files }}
     
     - name: Test with pytest
       run: |
