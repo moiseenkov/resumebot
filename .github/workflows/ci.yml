@@ -29,7 +29,7 @@ jobs:
     - name: Get changed files
       id: changed-files
       run: |
-        changed_files=$(git diff --name-only -r HEAD^1 HEAD)
+        changed_files=$(git diff --name-only origin/dev...HEAD)
         echo "changed_files=${changed_files}" >> $GITHUB_OUTPUT
     - name: Lint with pre-commit
       run: |
