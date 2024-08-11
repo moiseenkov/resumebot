@@ -5,7 +5,7 @@ name: Python application
 
 on:
   pull_request:
-    branches: [ "dev", "main" ]
+    branches: [ "dev"]
     types: [opened, reopened, edited, synchronize]
     
  
@@ -20,6 +20,8 @@ jobs:
       checks: write
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch all history for accurate diff
     
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
@@ -35,6 +37,7 @@ jobs:
     - name: Get changed files
       id: changed-files
       run: |
+        git fetch origin dev
         changed_files=$(git diff --name-only origin/dev...HEAD)
         echo "changed_files=${changed_files}" >> $GITHUB_OUTPUT
     
