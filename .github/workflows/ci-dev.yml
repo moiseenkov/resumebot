@@ -4,9 +4,8 @@
 name: Python application
 
 on:
-  pull_request:
+  pull_request_target:
     branches: [ "dev"]
-    types: [opened, reopened, edited, synchronize]
     
  
 permissions:
