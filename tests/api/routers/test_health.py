@@ -41,3 +41,6 @@ class TestHealthEndpoints:
         response = self.client.get("/health")
         assert response.status_code == 200
         assert response.json() == mock_json
+
+    def test_new(self) -> None:
+        assert True
