@@ -16,7 +16,7 @@ name: ci-dev
 
 on:
   pull_request_target:
-    branches: [ "dev"]
+    branches: ["dev"]
     
  
 permissions:
