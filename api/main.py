@@ -15,7 +15,15 @@ from fastapi import FastAPI
 
 from api.routers import health
 
-app = FastAPI(swagger_ui_parameters={"docExpansion": "list"})
+
+__version__ = "0.0.0"
+
+
+def get_app_version() -> str:
+    return __version__
+
+
+app = FastAPI(swagger_ui_parameters={"docExpansion": "list"}, version=get_app_version())
 
 
 app.include_router(health.router)

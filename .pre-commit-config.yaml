@@ -1,4 +1,18 @@
 repos:
+- repo: local
+  hooks:
+  - id: validate-openapi-schema
+    name: Validate OpenAPI schema
+    entry: scripts/pre_commit/hooks/validate_openapi_schema.py
+    language: python
+    language_version: "3.11"
+    require_serial: true
+    always_run: true
+    additional_dependencies:
+      - fastapi==0.112.0
+      - openapi-core==0.19.2
+      - rich==13.7.1
+      - uvicorn==0.30.5
 - repo: https://github.com/Lucas-C/pre-commit-hooks
   rev: v1.5.5
   hooks:
@@ -10,7 +24,7 @@ repos:
         - --comment-style
         - "|#|"
         - --license-filepath
-        - scripts/templates/license/LICENSE.txt
+        - scripts/ci/templates/license/LICENSE.txt
         - --fuzzy-match-generates-todo
     - id: insert-license
       name: Add license for all Markdown files
@@ -20,7 +34,7 @@ repos:
         - --comment-style
         - "<!--|| -->"
         - --license-filepath
-        - scripts/templates/license/LICENSE.txt
+        - scripts/ci/templates/license/LICENSE.txt
         - --fuzzy-match-generates-todo
     - id: insert-license
       name: Add license for all other files
@@ -29,7 +43,7 @@ repos:
         - --comment-style
         - "|#|"
         - --license-filepath
-        - scripts/templates/license/LICENSE.txt
+        - scripts/ci/templates/license/LICENSE.txt
         - --fuzzy-match-generates-todo
       files: >
         \.cfg$|\.conf$|\.ini$|\.ldif$|\.properties$|\.readthedocs$|\.service$|\.tf$|Dockerfile.*$
@@ -39,4 +53,5 @@ repos:
   - id: mypy
     args: [--strict]
     additional_dependencies:
-      - fastapi
+      - fastapi==0.112.0
+      - rich==13.7.1
