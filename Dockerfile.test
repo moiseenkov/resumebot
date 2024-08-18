@@ -1,6 +1,6 @@
 ARG TAG=latest
 
-FROM ghcr.io/moiseenkov/api:${TAG}
+FROM mastermaks/resume-bot-api:${TAG}
 
 RUN mkdir /tests
 COPY tests/api /tests
