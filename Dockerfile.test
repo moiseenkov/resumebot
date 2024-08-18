@@ -1,0 +1,12 @@
+ARG TAG=latest
+
+FROM mastermaks/resume-bot-api:${TAG}
+
+RUN mkdir /tests
+COPY tests/api /tests
+
+COPY requirements-dev.txt requirements-dev.txt
+
+RUN pip install -r requirements-dev.txt
+
+ENTRYPOINT ["pytest", "tests", "--verbose", "--junit-xml", "/reports/junit.xml", "--cov", "/api", "--cov-report", "xml:/reports/coverage.xml"]
